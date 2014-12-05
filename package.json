@@ -1,0 +1,20 @@
+{
+  "name": "angular-intro",
+  "version": "0.1.0",
+  "private": false,
+  "repository": "https://github.com/fdomig/angular-intro",
+  "description": "Quick introduction to AngularJS",
+  "author": "Franziskus Domig <fdomig@gmail.com>",
+  "scripts": {
+    "start": "node server.js",
+    "postinstall": "./node_modules/bower/bin/bower install --force-latest"
+  },
+  "dependencies": {
+    "bower": "^1.3.12",
+    "express": "4.*.*",
+    "extend": "^2.0.0",
+    "merge": "^1.2.0",
+    "morgan": "^1.5.0",
+    "node-rest-client": "^1.4.1"
+  }
+}

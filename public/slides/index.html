@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+
+    <title>AngularJS introduction</title>
+
+    <meta name="description" content="High level overview of the AngularJS framework.">
+    <meta name="author" content="Franziskus Domig">
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="stylesheet" href="css/reveal.min.css">
+    <link rel="stylesheet" href="css/theme/comsysto.css" id="theme">
+
+    <!-- For syntax highlighting -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+    <!-- If the query includes 'print-pdf', include the PDF print sheet -->
+    <script>
+      if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = 'css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+      }
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div class="reveal">
+
+      <!-- Any section element inside of this container is displayed as a slide -->
+      <div class="slides">
+
+        <section id="start">
+          <img src="img/angular-logo.png" class="img-no-border">
+          <h2>Introduction &amp; Basics</h2>
+          <p>
+            <small>Created by <a href="https://plus.google.com/u/0/+FranziskusDomig" target="_blank">Franziskus Domig</a></a></small>
+          </p>
+        </section>
+
+        <section id="disclaimer">
+          <h3>Disclaimer</h3>
+          <ul>
+            <li>I dislike JavaScript (as much as anyone else)</li>
+            <li>This is about Angular <strong>&nbsp;NOT&nbsp;</strong> JavaScript</li>
+            <li>This is Angular 1.x <strong>&nbsp;NO&nbsp;</strong> 2.0</li>
+            <li><strong>&nbsp;NO&nbsp;</strong> CoffeScript, TypeScript or any other flavor</li>
+            <li>This is for beginners <strong>&nbsp;NOT&nbsp;</strong> experts</li>
+            <li>This is my opinion <strong>&nbsp;NOT&nbsp;</strong> necessarily comSysto's</li>
+          </ul>
+        </section>
+
+        <section>
+          <section id="data-binding-old">
+            <h3>Data Binding</h3>
+            <code>index.html</code>
+<pre><code data-trim class="html">
+&lt;script src&quot;jquery.js&quot;&gt;&lt;/script&gt;
+&lt;input type=&quot;text&quot; id=&quot;name&quot;&gt;
+&lt;h1 id=&quot;greeting&quot;&gt;&lt;/h1&gt;
+</code></pre>
+           <code>script.js</code>
+<pre><code data-trim class="js">
+$(function () {
+  var name = $('#name');
+  var greeting = $('#greeting');
+
+  name.keyup(function() {
+    greeting.text('Hello ' + name.val() + '!');
+  });
+});
+</code></pre>
+          </section>
+          <section id="jquery-hell">
+            <h3>You end up with</h3>
+            <code>pop-out-menu.js</code>
+<pre><code data-trim class="javascript">
+jQuery(function($) {
+  var createPopOutMenu = function(ulMenuElement, direction) {
+    ulMenuElement.each(function() {
+      var ulMenuElement = $(this);
+      var containerUl = $('&lt;ul&gt;').attr('class', ulMenuElement.attr('class'));
+      var container = $('&lt;li&gt;').addClass('popOutMenu');
+
+      var containerDiv = $('&lt;div&gt;').css({position: 'absolute'})
+        .append(containerUl.append(container));
+
+      ulMenuElement.parent().append(containerDiv);
+      containerDiv.offset(ulMenuElement.offset());
+
+      // first hide menu to prevent flickering
+      ulMenuElement.find('li.popOutMenu').find('&gt;ul').hide();
+      
+      // change the parent class to disable css hover
+      ulMenuElement.removeClass('noJs').addClass('withJs');
+
+      var openPath = [];
+      var maxLeft = $('#main').offset().left;
+      var maxRight = maxLeft+$('#main').outerWidth();
+      var timeOut = null;
+      var timeOutIdle = null;
+
+      var normalizedOffset = function($obj)&Acirc; {
+        var o = $obj.offset();
+        return {top: Math.floor(o.top),left: Math.floor(o.left)}
+      }
+
+      var calculateUl = function(ul) {
+        ul.width(10000);
+        var maxWidth = 0;
+        ul.show().find('&gt; li').each(function() {
+          var a = $(this).find('&gt; span &gt; a');
+          a.css('display', 'inline');
+          maxWidth = Math.max(maxWidth, a.outerWidth(true)+2);
+          a.css('display', 'block');
+        });
+        ul.width(maxWidth)
+      };
+    });
+
+    /* a lot code more I removed for better visibility. no pun intended */
+  };
+
+  var main = function() {
+    createPopOutMenu($('ul.popOutMenu-rightwards.noJs'), 'right');
+    createPopOutMenu($('ul.popOutMenu-leftwards.noJs'), 'left');
+    createPopOutMenu($('ul.popOutMenu-upwards.noJs'), 'up');
+    createPopOutMenu($('ul.popOutMenu-downwards.noJs'), 'down');
+  }
+
+  main();
+});
+</code></pre>
+          </section>
+        </section>
+
+        <section>
+          <section id="data-binding-angular">
+            <h3>Data Binding</h3>
+            <code>index.html</code>
+<pre><code data-trim class="html">
+&lt;script src&quot;angular.js&quot;&gt;&lt;/script&gt;
+&lt;input type=&quot;text&quot; ng-model=&quot;name&quot;&gt;
+&lt;h1&gt;Hello {{ name }}!&lt;/h1&gt;
+</code></pre>
+          </section>
+          <section id="angular-delight">
+            <h3>You end up with</h3>
+            <code>popover.html</code>
+<pre><code data-trim class="html">
+&lt;div class=&quot;popover {{placement}}&quot; ng-class=&quot;{ in: isOpen(), fade: animation() }&quot;&gt;
+  &lt;div class=&quot;arrow&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;popover-inner&quot;&gt;
+      &lt;h3 class=&quot;popover-title&quot; ng-bind=&quot;title&quot; ng-show=&quot;title&quot;&gt;&lt;/h3&gt;
+      &lt;div class=&quot;popover-content&quot; ng-bind=&quot;content&quot;&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+<code>popover.js</code>
+<pre><code data-trim class="javascript">
+angular.module( 'ui.bootstrap.popover', [ 'ui.bootstrap.tooltip' ] )
+
+  .directive( 'popoverPopup', function () {
+    return {
+      restrict: 'EA',
+      replace: true,
+      scope: {
+        title: '@', content: '@', placement: '@', animation: '&amp;', isOpen: '&amp;'
+      },
+      templateUrl: 'template/popover/popover.html'
+    };
+  })
+
+;
+</code></pre>
+          </section>
+        </section>
+
+        <section id="outline">
+          <h3>Outline Live Coding</h3>
+          <h4><em>(Yes, live coding always fails ...)</em></h4>
+          <ul>
+            <li>Data Binding</li>
+            <li>Directives</li>
+            <li>Modules</li>
+            <li>Controllers</li>
+            <li>Services/Factories</li>
+            <li>Routing (if we have time)</li>
+          </ul>
+        </section>
+
+        <section id="summary">
+          <h3>What have we learnd?</h3>
+          <ul>
+            <li>AngularJS provides a robust framework for client-centeric single page applications (SPA)</li>
+            <li>
+              The AngularJS key features
+              <ul>
+                <li>Directives and filters</li>
+                <li>(Two-way) data binding</li>
+                <li>Views, Controllers, Scope</li>
+                <li>Modules and Routes</li>
+              </ul>
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <section id="zen">
+            <h3>The Zen of Angular</h3>
+            <ul>
+              <li>Decouple DOM manipulation from app logic</li>
+              <li>App testing is as important as app writing</li>
+              <li>Decouple client side from server side</li>
+              <li>Guide all development steps: UI, business logic, testing</li>
+              <li>Make common tasks trivial; difficult tasks possible</li>
+            </ul>
+
+            <ol class="references">
+              <li>
+                <a href="https://docs.angularjs.org/guide/introduction">
+                  What Is Angular?
+                </a>
+              </li>
+            </ol>
+          </section>
+
+          <section id="reasons">
+            <h3>Reasons to use AngularJS</h3>
+            <ol>
+              <li>MVC done right</li>
+              <li>A declarative user interface</li>
+              <li>Data models are POJOs</li>
+              <li>Behavior with directives</li>
+              <li>Flexibility with filters</li>
+              <li>Write less code</li>
+              <li>DOM manipulation where they belong</li>
+              <li>Service providers where they belong</li>
+              <li>Context aware communication</li>
+              <li>Unit testing ready</li>
+            </ol>
+
+            <ol class="references">
+              <li>
+                <a href="http://www.sitepoint.com/10-reasons-use-angularjs/">
+                  10 Reasons Why You Should Use AngularJS
+                </a>
+              </li>
+            </ol>
+          </section>
+
+          <section id="why">
+            <h3>Why AngularJS instead of ...</h3>
+            <ul>
+              <li>Has a template engine – Backbone has not</li>
+              <li>It provides a clear structure – Backbone does not</li>
+              <li>API is very stable – Ember changes very often</li>
+              <li>Two-way data binding built-in – Backbone has none</li>
+              <li>Testing is crucial – Backbone changes DOM directly ...</li>
+              <li>ngRoute sucks – Ember's is much better (ui-route replaces it very nicely though)</li>
+            </ul>
+          </section>
+        </section>
+
+        <section>
+          <section id="angular-2">
+            <h3>Angular 2.0-pre-concept-alpha</h3>
+            <ul>
+              <li>Can I already use it? <strong>NO</strong></li>
+              <li>Should I wait then? <strong>NO</strong></li>
+              <li>Is my 1.x code obsolete as soon as 2.0 arrives? <strong>MAYBE</strong></li>
+              <li>Angular 2.0 arrives <strong>EARLIEST</strong> in one year</li>
+              <li>Angular 1.x support <strong>AT LEAST</strong> 1.5–2 years after 2.0 GA</li>
+              <li>Your project is <strong>DEAD</strong> in 3 years anyway ...</li>
+            </ul>
+          </section>
+          <section id="angular-2-however">
+            <h3>However, some ideas</h3>
+            <ul>
+              <li>Everything you know will be different</li>
+              <li>No Directives, No Controllers, No Services, No DDOs, ...</li>
+              <li>Uses AtScript, a superset of TypeScript, a superset of ES6</li>
+              <li>Unify AngularJS with Angular-Dart</li>
+              <li>(But Dart has a different object model for DOM ... <strong>*sic*</strong>)</li>
+            </ul>
+            <ol class="references">
+              <li><a target="_blank" href="http://atscript.org/">AtScript</a></li>
+              <li><a target="_blank" href="http://www.typescriptlang.org/">TypeScript</a></li>
+              <li><a target="_blank" href="http://wiki.ecmascript.org/doku.php?id=harmony:specification_drafts">ECMAScript6</a></li>
+              <li><a target="_blank" href="http://eisenbergeffect.bluespire.com/all-about-angular-2-0/">All About Angular 2.0</a></li>
+            </ol>
+          </section>
+        </section>
+        
+      </div>
+
+    </div>
+
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.min.js"></script>
+
+    <script>
+
+      // Full list of configuration options available here:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: false,
+        slideNumber: false,
+
+        theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+        transition: Reveal.getQueryHash().transition || 'none', // default/cube/page/concave/zoom/linear/fade/none
+
+        // Parallax scrolling
+        // parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+        // parallaxBackgroundSize: '2100px 900px',
+
+        // Optional libraries used to extend on reveal.js
+        dependencies: [
+          { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+          { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+          { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+        ]
+      });
+
+    </script>
+
+  </body>
+</html>

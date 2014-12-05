@@ -1,0 +1,158 @@
+/**
+ * Solarized Dark theme for reveal.js.
+ * Author: Achim Staebler
+ */
+/* modifications */
+.reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5, .reveal h6 {
+  font-weight: 200;
+  letter-spacing: 0em !important; }
+.reveal p, .reveal li {
+  line-height: 1.45em;
+  font-weight: 100; }
+.reveal ol.references {
+  list-style: none;
+  margin-top: 3em;
+  font-size: .5em !important;
+  line-height: 1.25em !important; }
+  .reveal ol.references:before {
+    content: 'References';
+    color: #aaa;
+    border-bottom: 1px solid #aaa;
+    margin-bottom: .5em; }
+  .reveal ol.references li a:link, .reveal ol.references li a:active, .reveal ol.references li a:hover, .reveal ol.references li a:visited {
+    color: #aaa; }
+.reveal .img-no-border {
+  border: none;
+  box-shadow: none; }
+
+/*********************************************
+ * GLOBAL STYLES
+ *********************************************/
+body {
+  background: #ffffff;
+  background-color: #ffffff; }
+
+.reveal {
+  font-family: "Rockwell", serif;
+  font-size: 36px;
+  font-weight: normal;
+  letter-spacing: -0.02em;
+  color: #424242; }
+
+::selection {
+  color: #fff;
+  background: #FF5E99;
+  text-shadow: none; }
+
+/*********************************************
+ * HEADERS
+ *********************************************/
+.reveal h1,
+.reveal h2,
+.reveal h3,
+.reveal h4,
+.reveal h5,
+.reveal h6 {
+  margin: 0 0 20px 0;
+  color: #888;
+  font-family: "Helvetica", "Futura", sans-serif;
+  line-height: 0.9em;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  text-shadow: none; }
+
+.reveal h1 {
+  text-shadow: none; }
+
+/*********************************************
+ * LINKS
+ *********************************************/
+.reveal a:not(.image) {
+  color: #1E9FCC;
+  text-decoration: none;
+  -webkit-transition: color .15s ease;
+  -moz-transition: color .15s ease;
+  -ms-transition: color .15s ease;
+  -o-transition: color .15s ease;
+  transition: color .15s ease; }
+
+.reveal a:not(.image):hover {
+  color: #67c7e9;
+  text-shadow: none;
+  border: none; }
+
+.reveal .roll span:after {
+  color: #fff;
+  background: #146b89; }
+
+/*********************************************
+ * IMAGES
+ *********************************************/
+.reveal section img {
+  margin: 15px 0px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 4px solid #424242;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+  -webkit-transition: all .2s linear;
+  -moz-transition: all .2s linear;
+  -ms-transition: all .2s linear;
+  -o-transition: all .2s linear;
+  transition: all .2s linear; }
+
+.reveal a:hover img {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: #1E9FCC;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.55); }
+
+/*********************************************
+ * NAVIGATION CONTROLS
+ *********************************************/
+.reveal .controls div.navigate-left,
+.reveal .controls div.navigate-left.enabled {
+  border-right-color: #1E9FCC; }
+
+.reveal .controls div.navigate-right,
+.reveal .controls div.navigate-right.enabled {
+  border-left-color: #1E9FCC; }
+
+.reveal .controls div.navigate-up,
+.reveal .controls div.navigate-up.enabled {
+  border-bottom-color: #1E9FCC; }
+
+.reveal .controls div.navigate-down,
+.reveal .controls div.navigate-down.enabled {
+  border-top-color: #1E9FCC; }
+
+.reveal .controls div.navigate-left.enabled:hover {
+  border-right-color: #67c7e9; }
+
+.reveal .controls div.navigate-right.enabled:hover {
+  border-left-color: #67c7e9; }
+
+.reveal .controls div.navigate-up.enabled:hover {
+  border-bottom-color: #67c7e9; }
+
+.reveal .controls div.navigate-down.enabled:hover {
+  border-top-color: #67c7e9; }
+
+/*********************************************
+ * PROGRESS BAR
+ *********************************************/
+.reveal .progress {
+  background: rgba(0, 0, 0, 0.2); }
+
+.reveal .progress span {
+  background: #1E9FCC;
+  -webkit-transition: width 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985);
+  -moz-transition: width 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985);
+  -ms-transition: width 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985);
+  -o-transition: width 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985);
+  transition: width 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985); }
+
+/*********************************************
+ * SLIDE NUMBER
+ *********************************************/
+.reveal .slide-number {
+  color: #1E9FCC; }
+
+/*# sourceMappingURL=comsysto.css.map */

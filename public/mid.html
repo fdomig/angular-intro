@@ -1,0 +1,42 @@
+<html ng-app="bookApp">
+<head>
+  <link href="bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+  <script src="bower_components/angular/angular.js"></script>
+</head>
+<body>
+  <div class="container">
+    
+    <h4>Enter a book</h4>
+    <input type="name" class="form-control" ng-model="name">
+
+    <h3>{{ name }}</h3>
+
+    <table class="table table-striped" ng-controller="BookController as bookCtrl">
+      <tr ng-repeat="book in bookCtrl.books | filter:name">
+        <td>{{ book.title }}</td>
+        <td>{{ book.author }}</td>
+        <td>{{ book.price | currency }}</td>
+      </tr>
+    </table>
+
+    <script>
+    angular.module('bookApp', [])
+
+      .controller('BookController', function () {
+
+        var bookCtrl = this;
+
+        bookCtrl.books = [
+          { title: 'Clean Code', author: 'Robert C. Martin', price: 12.34 },
+          { title: 'Angular in Action', author: 'Brian Ford', price: 13.37 },
+          { title: 'PHP Design Patterns', author: 'Stephan Schmidt', price: 42.23 },
+          { title: 'High Performance MySQL', author: 'Baron Schwartz', price: 47.11 }
+        ];
+
+      })
+
+    ;
+    </script>
+  </div>
+</body>
+</html>

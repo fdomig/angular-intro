@@ -1,0 +1,30 @@
+<html ng-app="bookApp">
+<head>
+  <meta charset="UTF-8">
+  <title>My Books App</title>
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.css">
+  <link rel="stylesheet" href="assets/css/app.css">
+
+  <!-- dependencies -->
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/angular-animate/angular-animate.js"></script>
+  <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+  <script src="bower_components/lodash/dist/lodash.js"></script>
+  <script src="bower_components/restangular/dist/restangular.js"></script>
+  
+  <!-- app -->
+  <script src="app.js"></script>
+
+  <!-- book module -->
+  <script src="modules/book/index.js"></script>
+  <script src="modules/book/controller/BookListController.js"></script>
+  <script src="modules/book/controller/BookDetailController.js"></script>
+  <script src="modules/book/model/Books.js"></script>
+</head>
+<body>
+
+  <div class="container" ui-view></div>
+
+</body>
+</html>

@@ -1,0 +1,23 @@
+<div class="page-header">
+
+  <div class="row">
+    <div class="col-xs-4 col-sm-2">
+      <img ng-src="{{ bookCtrl.book.picture }}" alt="{{ bookCtrl.book.title }}" class="img-responsive">
+    </div>
+    <div class="col-xs-8 col-sm-10">
+      
+      <h3>{{ bookCtrl.book.author }}: {{ bookCtrl.book.title }}</h3>
+      <h5>{{ bookCtrl.book.subtitle }}</h5>
+
+      <h1>{{ bookCtrl.book.price | currency }}</h1>
+      <h3><small>In stock</small></h3>
+    </div>
+  </div>
+</div>
+
+<div class="well">
+  <h3>About the book</h3>
+  {{ bookCtrl.book.description }}
+</div>
+
+<p><a ui-sref="books()" class="btn btn-default">Back to list</a></p>

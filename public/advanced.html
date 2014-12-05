@@ -1,0 +1,45 @@
+<html ng-app="bookApp">
+<head>
+  <link href="bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+  <script src="bower_components/angular/angular.js"></script>
+</head>
+<body>
+  <div class="container">
+    
+    <h4>Enter a book</h4>
+    <input type="name" class="form-control" ng-model="name">
+
+    <h3>{{ name }}</h3>
+
+    <table class="table table-striped" ng-controller="BookController as bookCtrl">
+      <tr ng-repeat="book in bookCtrl.books | filter:name | orderBy:'price'">
+        <td>{{ book.title }}</td>
+        <td>{{ book.author }}</td>
+        <td>{{ book.price | currency:"&euro;" }}</td>
+      </tr>
+    </table>
+
+    <script>
+    angular.module('bookApp', [])
+
+      .service('BookService', function($http) {
+        this.getAll = function () {
+          return $http.get('/api/books');
+        };
+      })
+
+      .controller('BookController', function (BookService) {
+
+        var bookCtrl = this;
+
+        BookService.getAll().then(function (response) {
+          bookCtrl.books = response.data;
+        });
+
+      })
+
+    ;
+    </script>
+  </div>
+</body>
+</html>

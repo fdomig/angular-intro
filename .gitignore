@@ -1,0 +1,7 @@
+.DS_Store
+.idea
+*.iml
+bower_components/
+node_modules/
+public/slides/.sass-cache
+npm-debug.log

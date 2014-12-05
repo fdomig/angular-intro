@@ -1,0 +1,82 @@
+/**
+ * Solarized Dark theme for reveal.js.
+ * Author: Achim Staebler
+ */
+
+
+// Default mixins and settings -----------------
+@import "../template/mixins";
+@import "../template/settings";
+// ---------------------------------------------
+
+
+
+// Include theme-specific fonts
+
+//@import url(https://fonts.googleapis.com/css?family=Merriweather:300,400,700);
+//@import url(https://fonts.googleapis.com/css?family=Lato:100,300,400);
+
+// Override theme settings (see ../template/settings.scss)
+$mainColor: #1E9FCC;
+$headingColor: #888;
+$headingFont: "Helvetica", "Futura", sans-serif;
+$headingTextTransform: none;
+$headingTextShadow: none;
+$heading1TextShadow: $headingTextShadow;
+
+$mainFont: "Rockwell", serif;
+$mainFontSize: 36px;
+$mainColor: #424242;
+
+$backgroundColor: #ffffff;
+$linkColor: #1E9FCC;
+$linkColorHover: lighten( $linkColor, 20% );
+
+/* modifications */
+.reveal {
+
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 200;
+    letter-spacing: 0em !important;
+  }
+
+  p, li {
+    line-height: 1.45em;
+    font-weight: 100;
+  }
+
+  ol.references {
+
+    &:before {
+      content: 'References';
+      color: #aaa;
+      border-bottom: 1px solid #aaa;
+      margin-bottom: .5em;
+    }
+
+    list-style: none;
+    margin-top: 3em;
+    font-size: .5em !important;
+    line-height: 1.25em !important;
+
+    li {
+      a:link, a:active, a:hover, a:visited {
+        color: #aaa;
+      }
+    }
+
+  }
+
+  .img-no-border {
+    border: none;
+    box-shadow: none;
+  }
+
+}
+
+
+
+
+// Theme template ------------------------------
+@import "../template/theme";
+// ---------------------------------------------
