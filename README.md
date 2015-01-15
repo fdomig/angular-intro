@@ -2,7 +2,7 @@
 
 This talk gives a quick introduction to AngularJS. Starting with the differences to _traditional_ JavaScript frameworks like jQuery the most crucial parts of a "Single Page Application (SPA)" are explained.
 
-A simple example SPA`` is built from scratch with AngularJS. From an input field with no logic attached, a basic book collection is created with retrieving books via Ajax (REST) from a backend system. A glimpse on upcoming features of AngularJS 2.0 with a personal interpretation is given at the end of this presentation.
+A simple example SPA is built from scratch with AngularJS. From an input field with no logic attached, a basic book collection is created with retrieving books via Ajax (REST) from a backend system. A glimpse on upcoming features of AngularJS 2.0 with a personal interpretation is given at the end of this presentation.
 
 ## Prerequisites
 
